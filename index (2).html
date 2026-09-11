@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basket Shot</title>
+  
+  <style>
+    body {
+      margin: 0;
+      background: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      margin: 15px;
+    }
+    
+    #score {
+      font-size: 22px;
+      padding: 10px;
+    }
+    
+    #game {
+      position: relative;
+      width: 360px;
+      height: 500px;
+      margin: auto;
+      background: linear-gradient(#87ceeb 0%,
+          #dff6ff 65%,
+          #b5651d 65%);
+      overflow: hidden;
+      border: 4px solid white;
+      border-radius: 12px;
+    }
+    
+    #backboard {
+      position: absolute;
+      width: 100px;
+      height: 70px;
+      background: white;
+      top: 40px;
+      left: 130px;
+      border: 4px solid #333;
+    }
+    
+    #hoop {
+      position: absolute;
+      width: 80px;
+      height: 10px;
+      background: red;
+      top: 100px;
+      left: 140px;
+      border-radius: 5px;
+    }
+    
+    #ball {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      background: orange;
+      border-radius: 50%;
+      left: 160px;
+      bottom: 25px;
+    }
+    
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <h1>🏀 Basket Shot</h1>
+  
+  <div id="score">Score: 0</div>
+  
+  <div id="game">
+    <div id="backboard"></div>
+    <div id="hoop"></div>
+    <div id="ball"></div>
+  </div>
+  
+  <button onclick="shoot()">SHOOT 🏀</button>
+  
+  <script>
+    let score = 0;
+    let shooting = false;
+    
+    function shoot() {
+      if (shooting) return;
+      
+      shooting = true;
+      
+      const ball = document.getElementById("ball");
+      
+      let start = 25;
+      let end = 380;
+      let progress = 0;
+      
+      const animation = setInterval(() => {
+        
+        progress += 0.04;
+        
+        let y = start + (end - start) * progress;
+        
+        ball.style.bottom = y + "px";
+        
+        ball.style.left =
+          (160 + Math.sin(progress * 10) * 60) + "px";
+        
+        if (progress >= 1) {
+          
+          clearInterval(animation);
+          
+          score++;
+          
+          document.getElementById("score").textContent =
+            "Score: " + score;
+          
+          ball.style.bottom = "25px";
+          ball.style.left = "160px";
+          
+          shooting = false;
+        }
+        
+      }, 20);
+    }
+  </script>
+  
+</body>
+
+</html>
